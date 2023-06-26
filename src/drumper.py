@@ -7,10 +7,10 @@ from midiutil import MIDIFile
 model = load_model('../results/drummer.h5')
 
 # Create a seed sequence
-seed = np.random.rand(1, 32)
+seed = np.random.rand(1, 16, 2)
 
 # Define the number of steps to generate
-num_steps = 100
+num_steps = 50
 
 # Create a list to hold the generated sequence
 generated = []
@@ -41,7 +41,7 @@ midi = MIDIFile(1)
 
 # Set the instrument for the track (optional)
 # 9 is the MIDI program number for a drum kit
-midi.addProgramChange(track=0, channel=0, time=0, program=9)
+midi.addProgramChange(0, 9, 1, 9)
 
 # Add the generated notes to the MIDI file
 for i, note in enumerate(generated):
@@ -50,7 +50,7 @@ for i, note in enumerate(generated):
     pitch = int(pitch)
     velocity = int(velocity)
     # Add the note to the MIDI file
-    midi.addNote(track=0, channel=0, pitch=pitch,
+    midi.addNote(track=0, channel=9, pitch=pitch,
                  time=i, duration=1, volume=velocity)
 
 # Write the MIDI file to disk
@@ -58,7 +58,7 @@ with open("../results/output.mid", "wb") as output_file:
     midi.writeFile(output_file)
 
     # Path to your SoundFont file
-soundfont_path = "GeneralUser GS v1.471.sf2"
+soundfont_path = "da.sf2"
 
 # Path to your MIDI file
 midi_path = "../results/output.mid"
