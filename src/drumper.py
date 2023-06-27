@@ -1,9 +1,9 @@
 import os
-import numpy as np
-from keras.models import load_model
-from midiutil import MIDIFile
 import mido
 import random
+import numpy as np
+from midiutil import MIDIFile
+from keras.models import load_model
 
 
 def preprocess_midi(midi_file):
