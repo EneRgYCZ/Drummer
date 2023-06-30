@@ -1,10 +1,8 @@
 import os
 import mido
-import random
 import numpy as np
 from midiutil import MIDIFile
 from keras.models import load_model
-
 
 def preprocess_midi(midi_file):
     # Load the MIDI file
@@ -32,7 +30,7 @@ def preprocess_midi(midi_file):
     return preprocessed_data
 
 # Load the model
-model = load_model('../results/drummer.h5')
+model = load_model('../results/drummer2.h5')
 
 # Create a seed sequence
 midi_data = mido.MidiFile('../data/midi_songs/Songs/All_Star.mid')
@@ -82,19 +80,14 @@ midi = MIDIFile(1)
 # 9 is the MIDI program number for a drum kit
 midi.addProgramChange(0, 9, 1, 9)
 
-beat_time = [2, 3]
-
 # Add the generated notes to the MIDI file
 for i, note in enumerate(generated):
     pitch, velocity = note[0]
     # MIDI note number and velocity should be integers
     pitch = int(pitch)
-    velocity = int(velocity) + 20
+    velocity = int(velocity)
     print (pitch)
     print (velocity)
-    beat = random.choice(beat_time)
-    print (beat)
-    print ()
     # Add the note to the MIDI file
     midi.addNote(track=0, channel=9, pitch=pitch,
                  time=i / 3, duration=1, volume=velocity)

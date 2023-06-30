@@ -1,4 +1,5 @@
 import os
+import visualkeras
 import numpy as np
 import pandas as pd
 import tensorflow as tf
@@ -11,6 +12,7 @@ from keras.callbacks import EarlyStopping
 from keras.layers import LSTM, Dense, Flatten
 
 tf.config.run_functions_eagerly(True)
+tf.data.experimental.enable_debug_mode()
 
 # Directory containing the song files
 directory = '../data/songs'
@@ -82,4 +84,4 @@ model.summary()
 model.fit(x_train, y_train, epochs=1000, batch_size=32, callbacks=[early_stop], validation_split=0.3)
 
 # Save the model
-model.save('../results/drummer.h5')
+model.save('../results/drummer2.h5')
