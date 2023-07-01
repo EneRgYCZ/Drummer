@@ -86,27 +86,25 @@ for i, note in enumerate(generated):
     # MIDI note number and velocity should be integers
     pitch = int(pitch)
     velocity = int(velocity)
-    print (pitch)
-    print (velocity)
     # Add the note to the MIDI file
     midi.addNote(track=0, channel=9, pitch=pitch,
                  time=i / 3, duration=1, volume=velocity)
 
 # Write the MIDI file to disk
-with open("../results/output2.mid", "wb") as output_file:
+with open("../results/output3.mid", "wb") as output_file:
     midi.writeFile(output_file)
 
     # Path to your SoundFont file
 soundfont_path = "da.sf2"
 
 # Path to your MIDI file
-midi_path = "../results/output2.mid"
+midi_path = "../results/output3.mid"
 
 # Path to the output WAV file
-wav_path = "../results/output2.wav"
+wav_path = "../results/output3.wav"
 
 # Path to the output MP3 file
-mp3_path = "../results/output2.mp3"
+mp3_path = "../results/output3.mp3"
 
 # Use FluidSynth to convert the MIDI file to a WAV file
 os.system(
