@@ -30,7 +30,7 @@ def analyze_midi(midi_data):
           'number of notes': num_notes,
           'number of unique pitches': len(pitches),
           'average note duration': avg_duration,
-          'avereage nore velocity': avg_velocity
+          'avereage note velocity': avg_velocity
      }
 
 def analyze_all_midis(directory, generated_midi):
@@ -64,7 +64,7 @@ def plot_analyses(analyses):
      df['Name of the song'] = df['Name of the song'].str.replace('_', ' ')  # Replace underscores with spaces
      df['Name of the song'] = df['Name of the song'].str.replace('.mid', '')  # Replace underscores with spaces
 
-     variables = ['number of instruments', 'number of notes', 'number of unique pitches', 'average note duration', 'avereage nore velocity']
+     variables = ['number of instruments', 'number of notes', 'number of unique pitches', 'average note duration', 'avereage note velocity']
 
      for var in variables:
           plt.figure(figsize=(10, 13))
