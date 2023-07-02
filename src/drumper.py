@@ -32,11 +32,8 @@ def preprocess_midi(midi_file):
 # Load the model
 model = load_model('../results/drummer2.h5')
 
-# Create a seed sequence
-midi_data = mido.MidiFile('../data/midi_songs/Songs/All_Star.mid')
-
 # Preprocess the MIDI data
-preprocessed_data = preprocess_midi("../data/midi_songs/Songs/Its_My_Life.mid")
+preprocessed_data = preprocess_midi("../data/midi_songs/Songs/Money_For_Nothing.mid")
 
 # Create the seed sequence
 seed = preprocessed_data[:16]
@@ -91,24 +88,30 @@ for i, note in enumerate(generated):
                  time=i / 3, duration=1, volume=velocity)
 
 # Write the MIDI file to disk
-with open("../results/output3.mid", "wb") as output_file:
+with open("../results/output4.mid", "wb") as output_file:
     midi.writeFile(output_file)
 
     # Path to your SoundFont file
 soundfont_path = "da.sf2"
 
 # Path to your MIDI file
-midi_path = "../results/output3.mid"
+midi_path = "../results/output4.mid"
 
 # Path to the output WAV file
-wav_path = "../results/output3.wav"
+wav_path = "../results/output4.wav"
 
 # Path to the output MP3 file
-mp3_path = "../results/output3.mp3"
+mp3_path = "../results/output4.mp3"
+
+# Path to the output M4A file (MPEG-4 Encoding)
+m4a_path = "../results/output4.m4a"
 
 # Use FluidSynth to convert the MIDI file to a WAV file
 os.system(
     f"fluidsynth -ni {soundfont_path} {midi_path} -F {wav_path} -r 44100")
 
-# Use LAME to convert the WAV file to an MP3 file
-os.system(f"lame {wav_path} {mp3_path}")
+# Use ffmpeg to convert the WAV file to an MP3 file
+os.system(f"ffmpeg -i {wav_path} {mp3_path}")
+
+# Use ffmpeg to convert the WAV file to an M4A file
+os.system(f"ffmpeg -i {wav_path} {m4a_path}")
